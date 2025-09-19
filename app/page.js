@@ -12,7 +12,7 @@ export default function HomePage() {
         Drive with comfort and style today!
       </p>
       <div className="flex gap-6">
-        <Link href="/vehicles" className="px-6 py-3 rounded-md bg-indigo-600 text-lg font-semibold hover:bg-indigo-500 transition">
+        <Link href="/customer/vehicles" className="px-6 py-3 rounded-md bg-indigo-600 text-lg font-semibold hover:bg-indigo-500 transition">
           Book Now
         </Link>
         <Link href="/about" className="px-6 py-3 rounded-md border border-white text-lg font-semibold hover:bg-white hover:text-black transition">
