@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+
 export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
@@ -17,7 +20,7 @@ export default function SignupPage() {
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, email, phone_number: phoneNumber }),
       });
 
       const data = await res.json();
@@ -39,7 +42,7 @@ export default function SignupPage() {
     <div className="flex justify-center items-center min-h-screen">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900/95 backdrop-blur-md p-10 rounded-2xl shadow-xl w-full max-w-[500px] text-white"
+  className="bg-gray-900/95 backdrop-blur-md p-10 rounded-2xl shadow-xl w-full max-w-[700px] text-white"
       >
         <h2 className="text-3xl font-bold mb-6 text-center text-purple-400">
           Create Account
@@ -48,26 +51,51 @@ export default function SignupPage() {
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         {success && <p className="text-green-500 mb-4 text-center">{success}</p>}
 
-        <div className="mb-5">
-          <label className="block mb-2 font-semibold">Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-purple-700 focus:outline-none focus:border-purple-500 text-white"
-          />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label className="block mb-2 font-semibold">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-purple-700 focus:outline-none focus:border-purple-500 text-white"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 font-semibold">Phone Number</label>
+            <input
+              type="tel"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-purple-700 focus:outline-none focus:border-purple-500 text-white"
+            />
+          </div>
         </div>
 
-        <div className="mb-6">
-          <label className="block mb-2 font-semibold">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-purple-700 focus:outline-none focus:border-purple-500 text-white"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label className="block mb-2 font-semibold">Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-purple-700 focus:outline-none focus:border-purple-500 text-white"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 font-semibold">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-purple-700 focus:outline-none focus:border-purple-500 text-white"
+            />
+          </div>
         </div>
 
         <button
