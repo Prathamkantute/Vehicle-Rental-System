@@ -31,10 +31,14 @@ export default function LoginPage() {
       // ✅ Save JWT token in localStorage
       if (data.token) {
         localStorage.setItem("authToken", data.token);
-        setUser({ username }); // ✅ Set user immediately after login
+        setUser({ username, role: data.role }); // Set user with role
       }
 
-      router.push(data.role === "admin" ? "/admin" : "/customer");
+      if (data.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/customer");
+      }
     } catch (err) {
       console.error(err);
       setError("Something went wrong!");
